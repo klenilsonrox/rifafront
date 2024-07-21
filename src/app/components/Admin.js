@@ -42,6 +42,12 @@ const Admin = () => {
     setShowModal(true);
   };
 
+  function closeCreateModal(e){
+    if(e.target.id==="createModal"){
+        setShowCreateModal(false)
+    }
+  }
+
   const handleDelete = async () => {
     if (selectedRifa) {
       await deletarRifa(selectedRifa._id);
@@ -182,7 +188,7 @@ const Admin = () => {
 
       {/* Modal para criar rifa */}
       {showCreateModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 backdrop-blur-sm p-4" id='createModal' onClick={closeCreateModal}>
           <div className="bg-[#1F2937] p-6 rounded-md max-w-md w-full">
             <form onSubmit={handleCreateRifa} className="flex flex-col gap-4">
               <input
