@@ -81,7 +81,7 @@ const Rifas = () => {
               <div className={`grid grid-cols-5 mt-4 gap-2 max-h-[200px] overflow-y-scroll p-2 bg-gray-600 rounded-md ${visibleNumbers.includes(rif._id) ? '' : 'hidden'}`}>
                 {rif.numeros_comprados.length === 0 && <p className="col-span-5 text-center text-white">Você não comprou nenhuma rifa</p>}
                 {rif.numeros_comprados.map(num => (
-                  <p key={num.numero} className='bg-yellow-500 text-center text-black font-bold rounded-md p-1'>{num.numero}</p>
+                  <p key={num.numero} className='bg-yellow-500 text-center text-black font-bold rounded-md p-1 text-xs'>{num.numero}</p>
                 ))}
               </div>
             </div>
