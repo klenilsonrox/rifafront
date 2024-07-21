@@ -6,16 +6,17 @@ import { FaPlus, FaMinus, FaArrowRightLong, FaArrowDown, FaArrowUp } from "react
 import { getToken } from '@/app/actions/getToken';
 import { GiConfirmed } from "react-icons/gi";
 import Link from 'next/link';
+import Loading from '@/app/components/Loading';
 
 const Page = ({ params }) => {
   const [rifa, setRifa] = useState(null);
   const [quantidadeBilhetes, setQuantidadeBilhetes] = useState(10);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [descVisible, setDescVisible] = useState(false);
   const [modalLogin, setModalLogin] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [disabled,setDisabled]=useState(null)
+  const [disabled, setDisabled] = useState(false); // fixed to initialize as false
 
   const successRef = useRef();
   const errorRef = useRef();
@@ -26,13 +27,13 @@ const Page = ({ params }) => {
 
   function aumentarQuantidade() {
     if (quantidadeBilhetes < 2000) {
-      setQuantidadeBilhetes(prev => prev + 1);
+      setQuantidadeBilhetes(prev => Math.min(prev + 1, 2000));
     }
   }
 
   function diminuirQuantidade() {
     if (quantidadeBilhetes > 10) {
-      setQuantidadeBilhetes(prev => prev - 1);
+      setQuantidadeBilhetes(prev => Math.max(prev - 1, 10));
     }
   }
 
@@ -58,9 +59,10 @@ const Page = ({ params }) => {
 
   function pegarValor(e) {
     const elemento = parseInt(e.currentTarget.querySelector("p").textContent.replace("+", ""), 10);
-    if (quantidadeBilhetes + elemento <= 2000) {
-      setQuantidadeBilhetes(prev => prev + elemento);
-    }
+    setQuantidadeBilhetes(prev => {
+      const novaQuantidade = prev + elemento;
+      return novaQuantidade <= 2000 ? novaQuantidade : 2000;
+    });
   }
 
   useEffect(() => {
@@ -134,11 +136,9 @@ const Page = ({ params }) => {
     }
   }
 
-  console.log(rifa)
- 
-
   return (
     <div className="max-w-3xl w-full mx-auto bg-[#f4f6f8] rounded-xl">
+      {loading && <Loading /> }
       {success && (
         <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm'>
           <p className='flex items-center gap-2 bg-white text-black px-4 py-2 border-b-4 border-green-600'>Bilhetes comprados com sucesso <GiConfirmed className='text-green-600' /></p>

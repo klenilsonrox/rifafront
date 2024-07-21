@@ -13,6 +13,7 @@ const useFetchRifas = () => {
 
         const fetchRifas = async () => {
             try {
+                setLoading(true)
                 const response = await fetch(`${baseUrl}/api/rifas` ,{
                 next:{
                     revalidate:10

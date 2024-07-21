@@ -3,11 +3,12 @@ import React from 'react';
 import useFetchRifas from './hooks/useInfos';
 import Link from 'next/link';
 import Header from './components/Header';
+import Loading from './components/Loading';
 
 
 
 const Page = () => {
-  const { rifas, ultima } = useFetchRifas();
+  const { rifas, ultima, loading } = useFetchRifas();
 
   const formatDateToBrazilian = (dateString) => {
     const date = new Date(dateString);
@@ -16,6 +17,7 @@ const Page = () => {
 
   return (
     <div className="p-6 max-w-4xl mx-auto bg-gray-800 rounded-lg">
+      {loading && <Loading /> }
       <Header />
       <h1 className='text-center mb-6 text-3xl font-bold text-white'>Campanhas</h1>
       {ultima && (
