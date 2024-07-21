@@ -6,6 +6,10 @@
   animation: anima .5s ease-in-out;
 }
 
+body{
+  background-color: #1F2937;
+}
+
 
 @keyframes anima {
   from{

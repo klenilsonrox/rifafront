@@ -19,7 +19,7 @@ const Page = () => {
     <div className="p-6 max-w-4xl mx-auto bg-gray-800 rounded-lg">
       {loading && <Loading /> }
       <Header />
-      <h1 className='text-center mb-6 text-3xl font-bold text-white'>Campanhas</h1>
+      <h1 className='text-center my-6 text-3xl font-bold text-white'>Campanhas</h1>
       {ultima && (
         <Link href={`/rifas/${ultima._id}`} className='mb-6 flex flex-col bg-gray-900 rounded-lg shadow-lg'>
           <img src={ultima.urlImage} alt="" className='w-full max-h-[300px] object-cover rounded-t-lg' />
