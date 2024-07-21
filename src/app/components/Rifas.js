@@ -58,14 +58,13 @@ const Rifas = () => {
     );
   };
 
-  console.log(rifas)
 
   return (
     <div className='bg-gray-900 flex justify-center items-center'>
-      <div className="bg-gray-800 p-6 max-w-4xl mx-auto flex flex-col gap-6 ">
+      <div className="bg-gray-800 p-2 max-w-4xl mx-auto flex flex-col gap-6 ">
         {rifas && rifas.map(rif => (
-          <div key={rif._id} className='bg-gray-700 p-4 rounded-lg'>
-            <Link href="/" className='flex gap-6'>
+          <div key={rif._id} className='bg-gray-700 p-4 rounded-lg '>
+            <Link href="/" className='flex gap-2'>
               <img src={rif.urlImage} alt="" className='w-32 h-32 object-cover rounded-lg' />
               <div>
                 <h2 className='text-xl font-bold text-white'>{rif.nome}</h2>
