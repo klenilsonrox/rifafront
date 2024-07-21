@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl = "https://rifaback.vercel.app";
 
 const useFetchRifas = () => {
     const [rifas, setRifas] = useState([]);

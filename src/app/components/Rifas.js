@@ -58,6 +58,8 @@ const Rifas = () => {
     );
   };
 
+  console.log(rifas)
+
   return (
     <div className='bg-gray-900 flex justify-center items-center'>
       <div className="bg-gray-800 p-6 max-w-4xl mx-auto flex flex-col gap-6 ">
