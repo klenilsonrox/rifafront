@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react';
+import { IoIosArrowBack } from "react-icons/io";
 import { baseUrl } from '../../../../baseUrl';
 import { IoMdAlert } from "react-icons/io";
 import { FaPlus, FaMinus, FaArrowRightLong, FaArrowDown, FaArrowUp } from "react-icons/fa6";
@@ -137,7 +138,8 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div className="max-w-3xl w-full mx-auto bg-[#f4f6f8] rounded-xl">
+    <div className="max-w-3xl w-full mx-auto bg-[#f4f6f8] rounded-xl relative">
+      <Link href="/" className='absolute z-10 bg-white top-2 left-2 p-2 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
       {loading && <Loading /> }
       {success && (
         <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm'>
