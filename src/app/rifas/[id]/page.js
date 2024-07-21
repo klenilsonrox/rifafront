@@ -141,7 +141,7 @@ const Page = ({ params }) => {
   return (
     <div className="max-w-3xl w-full mx-auto bg-[#1F2937] rounded-xl relative p-2">
       <Header />
-      <Link href="/" className='absolute z-10 bg-white top-[90px] left-2 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
+      <Link href="/" className='absolute z-10 bg-white top-[120px] left-2 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
       {loading && <Loading /> }
       {success && (
         <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm top-2'>

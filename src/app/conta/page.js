@@ -1,28 +1,18 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { getuser } from '../actions/getUSer';
 import Rifas from '../components/Rifas';
 import Link from 'next/link';
+import { buscarUsuario } from '../functions/buscarUser';
+
 
 const Page = () => {
   const [user, setUser] = useState("");
 
-  async function buscarUser() {
-    try {
-      const usuario = await getuser();
-
-      if (usuario === 401) {
-        window.location.href = "/login";
-      }
-
-      setUser(usuario);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
-    buscarUser();
+ buscarUsuario().then(res=>setUser(res))
+  
+    
   }, []);
 
   return (

@@ -14,7 +14,6 @@ export async function getuser() {
         });
 
         if (!response.ok) {
-            // Se a resposta não for bem-sucedida, lança um erro com o status e mensagem
           return response.status
         }
 
@@ -22,7 +21,6 @@ export async function getuser() {
         return data;
 
     } catch (error) {
-        // Lança um erro com a mensagem do erro
         console.error('Erro ao buscar usuário:', error.message);
         throw new Error(`Erro ao buscar usuário: ${error.message}`);
     }

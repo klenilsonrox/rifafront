@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { baseUrl } from '../../../baseUrl';
 import { loginuser } from '../actions/loginUser';
 
 const Login = () => {

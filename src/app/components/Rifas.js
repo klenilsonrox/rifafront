@@ -7,7 +7,6 @@ import { baseUrl } from '../../../baseUrl';
 const Rifas = () => {
   const [rifas, setRifa] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [visibleNumbers, setVisibleNumbers] = useState([]);
 
   async function buscarUser() {
@@ -23,7 +22,7 @@ const Rifas = () => {
 
       const data = await response.json();
       
-      // Ordenando os números antes de definir o estado
+  
       const rifasOrdenadas = data.rifas.map(rifa => ({
         ...rifa,
         numeros_comprados: rifa.numeros_comprados.sort((a, b) => a.numero - b.numero)
