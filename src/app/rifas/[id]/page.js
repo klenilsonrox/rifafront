@@ -228,7 +228,7 @@ const Page = ({ params }) => {
       </div>
 
       {modalLogin && (
-        <div id='modalLogin' className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50' onClick={fecharModalLogin}>
+        <div id='modalLogin' className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 backdrop-blur-sm' onClick={fecharModalLogin}>
           <div className='bg-white p-6 rounded-md max-w-xs text-center'>
             <p className='mb-4'>Você precisa estar logado para comprar bilhetes.</p>
             <Link href="/login">
