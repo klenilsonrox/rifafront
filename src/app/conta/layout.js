@@ -1,8 +1,4 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-
-const inter = Inter({ subsets: ["latin"] });
+import HeaderLogado from "../components/HeaderLogado";
 
 export const metadata = {
   title: "Rx campanhas",
@@ -12,8 +8,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
-       
+      <body>
+        <HeaderLogado />
         {children}</body>
     </html>
   );
