@@ -22,7 +22,7 @@ const page = () => {
     }
   
     } catch (error) {
-      console.log(error)
+      return error.message
     }
   }
 

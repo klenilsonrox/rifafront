@@ -190,7 +190,7 @@ const Page = ({ params }) => {
               </div>
 
               {!loading ? (
-                <button className='flex items-center bg-green-600 gap-2 flex-1 px-2 py-1 rounded-md cursor-pointer' onClick={comprar}>
+                <button className='flex items-center bg-green-600 gap-2 flex-1 px-2 py-1 rounded-md cursor-pointer py-2' onClick={comprar}>
                   <div className='bg-white p-3 rounded-md'>
                     <FaArrowRightLong className='text-green-600' />
                   </div>
