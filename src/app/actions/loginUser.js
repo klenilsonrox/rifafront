@@ -21,7 +21,7 @@ export async function loginuser(email, password) {
 
     const data = await response.json();
 
-    console.log(data)
+ 
 
     if (!response.ok) {
       return {status:401, error: data.message || 'Erro ao realizar login.' };
@@ -32,7 +32,7 @@ export async function loginuser(email, password) {
       httpOnly: true
     });
 
-    return {status:201, success: 'login realizado com sucesso.' };
+    return {status:201, data, success: 'login realizado com sucesso.' };
   } catch (err) {
     return { error: 'Erro ao fazer login.' };
   }

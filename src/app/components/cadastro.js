@@ -35,6 +35,7 @@ const Cadastro = () => {
       if (response.status===201) {
         setMessage('Cadastro realizado com sucesso.');
         window.location.href="/conta"
+  
       } else {
         setError(response.error);
       }

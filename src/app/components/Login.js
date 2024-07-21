@@ -24,9 +24,13 @@ const Login = () => {
         }, 2000);
       }
 
-      if (response.status === 201) {
-        window.location.href = '/conta';
-      }
+      console.log(response.data)
+
+      response.data.isAdmin ? window.location.href = '/conta/admin' : window.location.href = '/conta'
+
+      // if (response.status === 201) {
+      //   window.location.href = '/conta';
+      // }
 
     } catch (error) {
       console.error('Erro ao fazer login', error);

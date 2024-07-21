@@ -30,7 +30,7 @@ export async function cadastrouser(nome, email, password) {
       httpOnly: true
     });
 
-    return {status:201, success: 'Cadastro realizado com sucesso.' };
+    return {status:201, data, success: 'Cadastro realizado com sucesso.' };
   } catch (err) {
     return { error: 'Erro ao realizar cadastro.' };
   }

@@ -20,6 +20,7 @@ const page = () => {
     if(data.message===undefined){
       window.location.href="/"
     }
+
   
     } catch (error) {
       return error.message
