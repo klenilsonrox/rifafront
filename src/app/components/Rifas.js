@@ -8,6 +8,7 @@ const Rifas = () => {
   const [rifas, setRifa] = useState(null);
   const [loading, setLoading] = useState(true);
   const [visibleNumbers, setVisibleNumbers] = useState([]);
+  const [noRifa,setNoRifa]=useState("")
 
   async function buscarUser() {
     try {
@@ -21,7 +22,11 @@ const Rifas = () => {
       });
 
       const data = await response.json();
-      
+
+      if(data.message){
+        setNoRifa("você nao comprou nenhuma rifa :(")
+        return
+      }
   
       const rifasOrdenadas = data.rifas.map(rifa => ({
         ...rifa,
@@ -41,13 +46,18 @@ const Rifas = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-white">Carregando...</div>;
+    return <div className='flex flex-col items-center justify-center'>
+      <p className='w-6 h-6 border-2 rounded-full animate-spin border-t-black mx-auto'></p>
+      <p className='text-white'>carregando...</p>
+    </div>;
   }
 
   const formatDateToBrazilian = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
   };
+
+  
 
   const toggleNumbersVisibility = (rifaId) => {
     setVisibleNumbers(prevState =>
@@ -57,10 +67,19 @@ const Rifas = () => {
     );
   };
 
+  if(noRifa) return <p className='text-center text-white'>{noRifa}</p>
+  
+
+  if(rifas===null) return <div className='flex flex-col items-center justify-center'>
+  <p className='w-6 h-6 border-2 rounded-full animate-spin border-t-black mx-auto'></p>
+  <p className='text-white'>carregando...</p>
+</div>;
+
 
   return (
     <div className='bg-gray-900 flex justify-center items-center'>
       <div className="bg-gray-800 p-2 max-w-4xl mx-auto flex flex-col gap-6 ">
+
         {rifas && rifas.map(rif => (
           <div key={rif._id} className='bg-gray-700 p-4 rounded-lg '>
             <Link href="/" className='flex gap-2'>

@@ -5,18 +5,21 @@ import Link from 'next/link';
 import { buscarUsuario } from '../functions/buscarUser';
 
 
+
 const Page = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
 
 
   useEffect(() => {
  buscarUsuario().then(res=>setUser(res))
-  
-    
+ 
   }, []);
 
+  if(!user) return null
+
   return (
-    <div className='bg-gray-900 min-h-[70vh] flex justify-center  py-8'>
+    <>
+      {user && <div className='bg-gray-900 min-h-[70vh] flex justify-center  py-8'>
       <div className="bg-gray-800 p-6 max-w-4xl mx-auto flex flex-col gap-6 rounded-lg shadow-lg">
         <div className='flex justify-between items-center mb-4'>
           <h1 className='text-2xl font-bold text-white'>Rifas Compradas</h1>
@@ -24,7 +27,8 @@ const Page = () => {
         </div>
         <Rifas />
       </div>
-    </div>
+    </div> }
+    </>
   );
 };
 

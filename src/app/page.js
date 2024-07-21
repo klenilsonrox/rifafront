@@ -1,14 +1,25 @@
 'use client'
-import React from 'react';
+import React, { useEffect } from 'react';
 import useFetchRifas from './hooks/useInfos';
 import Link from 'next/link';
 import Header from './components/Header';
 import Loading from './components/Loading';
+import { getToken } from './actions/getToken';
+import jwt from "jsonwebtoken"
 
 
 
 const Page = () => {
   const { rifas, ultima, loading } = useFetchRifas();
+
+  async function verificaTOken(){
+    const token = await getToken()
+
+  }
+
+  useEffect(()=>{
+    verificaTOken()
+  },[])
 
   const formatDateToBrazilian = (dateString) => {
     const date = new Date(dateString);
