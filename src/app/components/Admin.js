@@ -6,6 +6,7 @@ import Header from '@/app/components/Header';
 import { getToken } from '../actions/getToken';
 import Link from 'next/link';
 import { baseUrl } from '../../../baseUrl';
+import Loading from './Loading';
 
 const Admin = () => {
   const { rifas } = useFetchRifas();
@@ -17,6 +18,7 @@ const Admin = () => {
   const [ganhador, setGanhador] = useState(null);
   const [erro, setErro] = useState(null);
   const errorRef = useRef();
+  const [loading,setLoading]=useState(false)
 
   const formatDateToBrazilian = (dateString) => {
     const date = new Date(dateString);
@@ -45,6 +47,7 @@ const Admin = () => {
   const buscarGanhador = async () => {
     const token = await getToken();
     try {
+        setLoading(true)
       const response = await fetch(`${baseUrl}/rifas/${rifa._id}/numero/${number}`, {
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +56,7 @@ const Admin = () => {
       });
 
       const data = await response.json();
-      console.log(data.status);
+  setLoading(false)
 
       if (data.status === 200) {
         setGanhador(data.user);
@@ -73,6 +76,8 @@ const Admin = () => {
 
     } catch (error) {
       console.log(error);
+    }finally{
+        setLoading(false)
     }
   };
 
@@ -89,7 +94,7 @@ const Admin = () => {
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-[#1F2937] rounded-xl p-4">
-
+ {loading && <Loading />}
       {/* Modal para buscar ganhador */}
       {modalBusca && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 backdrop-blur-sm" id='modalBusca' onClick={close}>
