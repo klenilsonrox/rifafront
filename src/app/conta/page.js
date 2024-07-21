@@ -26,7 +26,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div className='bg-gray-900 min-h-screen flex justify-center items-center py-8'>
+    <div className='bg-gray-900 min-h-[70vh] flex justify-center  py-8'>
       <div className="bg-gray-800 p-6 max-w-4xl mx-auto flex flex-col gap-6 rounded-lg shadow-lg">
         <div className='flex justify-between items-center mb-4'>
           <h1 className='text-2xl font-bold text-white'>Rifas Compradas</h1>
