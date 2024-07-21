@@ -8,6 +8,7 @@ import { getToken } from '@/app/actions/getToken';
 import { GiConfirmed } from "react-icons/gi";
 import Link from 'next/link';
 import Loading from '@/app/components/Loading';
+import Header from '@/app/components/Header';
 
 const Page = ({ params }) => {
   const [rifa, setRifa] = useState(null);
@@ -138,11 +139,12 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div className="max-w-3xl w-full mx-auto bg-[#f4f6f8] rounded-xl relative">
-      <Link href="/" className='absolute z-10 bg-white top-2 left-2 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
+    <div className="max-w-3xl w-full mx-auto bg-[#1F2937] rounded-xl relative p-2">
+      <Header />
+      <Link href="/" className='absolute z-10 bg-white top-[90px] left-2 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
       {loading && <Loading /> }
       {success && (
-        <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm'>
+        <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm top-2'>
           <p className='flex items-center gap-2 bg-white text-black px-4 py-2 border-b-4 border-green-600'>Bilhetes comprados com sucesso <GiConfirmed className='text-green-600' /></p>
         </div>
       )}
@@ -151,8 +153,8 @@ const Page = ({ params }) => {
           <p className='flex items-center gap-2 bg-white text-black px-4 py-2 border-b-4 border-red-600'>{error}<IoMdAlert className='text-red-600' /></p>
         </div>
       )}
-      <div className='relative bg-gradient-to-b from-white to-black'>
-        {rifa && <img src={rifa.urlImage} alt={rifa.nome} className='w-full h-full max-h-[400px] object-cover' />}
+      <div className='relative bg-gradient-to-b from-white to-black mt-4'>
+        {rifa && <img src={rifa.urlImage} alt={rifa.nome} className='w-full h-full max-h-[400px] object-cover rounded-tl-md rounded-tr-md' />}
         <div className='absolute bottom-[20px] z-10 text-white p-2'>
           {!rifa?.sorteada ? (
             <button className='bg-green-600 rounded-md text-white py-2 px-6 my-2 animate-pulse'>Adquira já</button>
@@ -166,14 +168,14 @@ const Page = ({ params }) => {
         </div>
       </div>
       <div className='flex items-center justify-center flex-col px-4'>
-        <p className='text-center mt-1 text-xs'>Sorteio <span className='bg-white py-1 px-2 rounded-md shadow-md text-xs ml-2'>{formatDateToBrazilian(rifa?.data_sorteio)} às 19:00</span> Por apenas <span className='ml-2 bg-[#1f1e1e] text-white px-4 rounded-md'>R$ {Number(rifa?.preco)}</span></p>
+        <p className='text-center mt-1 text-xs py-2 text-white'>Sorteio <span className='bg-white py-1 px-2 rounded-md shadow-md text-xs ml-2 text-black'>{formatDateToBrazilian(rifa?.data_sorteio)} às 19:00</span> Por apenas <span className='ml-2 bg-[#111827] text-white px-4 rounded-md'>R$ {Number(rifa?.preco)}</span></p>
         <p className='bg-white w-full text-center mt-1 text-gray-400 rounded-full text-sm py-1 mb-3'>Quanto mais títulos, mais chances de ganhar</p>
 
         {!rifa?.sorteada && (
           <>
             <div className='grid grid-cols-3 w-full gap-2'>
               {[50, 100, 200, 300, 500, 1000].map(valor => (
-                <div key={valor} className='bg-[#1f1e1e] text-white rounded-md text-center py-4 cursor-pointer' onClick={pegarValor}>
+                <div key={valor} className='bg-[#111827] text-white rounded-md text-center py-4 cursor-pointer' onClick={pegarValor}>
                   <p className='text-3xl font-bold'>+{valor}</p>
                   <p>SELECIONAR</p>
                 </div>
@@ -184,7 +186,7 @@ const Page = ({ params }) => {
               <div className='bg-white px-2 py-4 rounded-md'>
                 <button className='border rounded-full p-1 text-gray-500' onClick={diminuirQuantidade}><FaMinus /></button>
                 <span className='px-4 lg:px-20 border mx-2 rounded-md py-2 font-medium'>{quantidadeBilhetes}</span>
-                <button className='border rounded-full bg-[#1f1e1e] text-white p-1' onClick={aumentarQuantidade}><FaPlus /></button>
+                <button className='border rounded-full bg-[#111827] text-white p-1' onClick={aumentarQuantidade}><FaPlus /></button>
               </div>
 
               {!loading ? (
