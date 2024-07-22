@@ -60,6 +60,11 @@ const HeaderLogado = () => {
               <p className="text-lg font-medium hover:text-yellow-400 transition-colors">Configurações</p>
             </Link>
           </li>}
+          {user && <li className="list-none" onClick={closeMenu}>
+            <Link href="/conta">
+              <p className="text-lg font-medium hover:text-yellow-400 transition-colors">minha conta</p>
+            </Link>
+          </li>}
           {!user && <li className="list-none" onClick={closeMenu}>
             <Link href="/login">
               <p className="text-lg font-medium hover:text-yellow-400 transition-colors">Entrar</p>
