@@ -20,6 +20,9 @@ const ResetPasswordPage = ({ params }) => {
 
     try {
       const response = await fetch(`${baseUrl}/reset-password`, {
+        next:{
+          revalidate:1
+        },
         method: "POST",
         headers: {
           "Content-Type": "application/json",

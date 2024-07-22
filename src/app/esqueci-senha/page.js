@@ -15,6 +15,9 @@ const RequestPasswordReset = () => {
 
     try {
       const response = await fetch(`${baseUrl}/request-password-reset`, {
+        next:{
+          revalidate:1
+        },
         method: "POST",
         headers: {
           "Content-Type": "application/json",

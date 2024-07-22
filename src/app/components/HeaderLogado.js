@@ -13,11 +13,12 @@ const HeaderLogado = () => {
     setOpen(open => !open);
   }
 
+
   async function buscarUser() {
     try {
       const response = await getuser();
 
-
+console.log(response)
      setUser(response)
 
      
@@ -39,6 +40,9 @@ const HeaderLogado = () => {
   function closeMenu(){
     setOpen(false)
   }
+
+  
+
 
   return (
     <div className='bg-gray-900 text-white z-50'>
