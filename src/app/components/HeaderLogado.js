@@ -19,9 +19,12 @@ const HeaderLogado = () => {
       const response = await getuser();
 
 console.log(response)
-     setUser(response)
 
-     
+if(response===401){
+  setUser(null)
+}
+
+    
 
     } catch (error) {
       console.log(error);
