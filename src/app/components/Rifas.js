@@ -3,6 +3,7 @@ import { getuser } from '../actions/getUSer';
 import Link from 'next/link';
 import { getToken } from '../actions/getToken';
 import { baseUrl } from '../../../baseUrl';
+import HeaderLogado from './HeaderLogado';
 
 const Rifas = () => {
   const [rifas, setRifa] = useState(null);
@@ -78,6 +79,7 @@ const Rifas = () => {
 
   return (
     <div className='bg-gray-900 flex justify-center items-center'>
+      <HeaderLogado />
       <div className="bg-gray-800 p-2 max-w-4xl mx-auto flex flex-col gap-6 ">
 
         {rifas && rifas.map(rif => (

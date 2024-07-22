@@ -1,7 +1,8 @@
 'use server'
 
 import { cookies } from "next/headers"
-import { baseUrl } from "../../../baseUrl"
+import { baseUrl } from "../../../baseUrl";
+
 
 export async function getuser() {
     const token = cookies().get('token')

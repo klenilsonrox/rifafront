@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import HeaderLogado from "./components/HeaderLogado";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
      <link rel="shortcut icon" href="./favicon.png" type="image/x-icon"></link>
 
       <body className={inter.className}>
-       
+        <HeaderLogado />
         {children}</body>
     </html>
   );

@@ -27,6 +27,8 @@ const Page = ({ params }) => {
     setDescVisible(prev => !prev);
   }
 
+  console.log(rifa)
+
   function aumentarQuantidade() {
     if (quantidadeBilhetes < 2000) {
       setQuantidadeBilhetes(prev => Math.min(prev + 1, 2000));
@@ -140,8 +142,7 @@ const Page = ({ params }) => {
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-[#1F2937] rounded-xl relative p-2">
-      <Header />
-      <Link href="/" className='absolute z-10 bg-white top-[120px] left-2 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
+      <Link href="/" className='absolute z-10 bg-white top-[30px] left-4 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
       {loading && <Loading /> }
       {success && (
         <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm top-2'>
@@ -149,13 +150,13 @@ const Page = ({ params }) => {
         </div>
       )}
       {error && (
-        <div className='bg-black fixed inset-0 z-50 flex items-center justify-center bg-opacity-25 backdrop-blur-sm'>
+        <div className='bg-black fixed inset-0  flex items-center justify-center bg-opacity-25 backdrop-blur-sm'>
           <p className='flex items-center gap-2 bg-white text-black px-4 py-2 border-b-4 border-red-600'>{error}<IoMdAlert className='text-red-600' /></p>
         </div>
       )}
       <div className='relative bg-gradient-to-b from-white to-black mt-4'>
         {rifa && <img src={rifa.urlImage} alt={rifa.nome} className='w-full h-full max-h-[400px] object-cover rounded-tl-md rounded-tr-md' />}
-        <div className='absolute bottom-[20px] z-10 text-white p-2'>
+        <div className='absolute bottom-[20px]  text-white p-2'>
           {!rifa?.sorteada ? (
             <button className='bg-green-600 rounded-md text-white py-2 px-6 my-2 animate-pulse'>Adquira já</button>
           ) : (
@@ -170,7 +171,8 @@ const Page = ({ params }) => {
       <div className='flex items-center justify-center flex-col px-4'>
         <p className='text-center mt-1 text-xs py-2 text-white'>Sorteio <span className='bg-white py-1 px-2 rounded-md shadow-md text-xs ml-2 text-black'>{formatDateToBrazilian(rifa?.data_sorteio)} às 19:00</span> Por apenas <span className='ml-2 bg-[#111827] text-white px-4 rounded-md'>R$ {Number(rifa?.preco)}</span></p>
         <p className='bg-white w-full text-center mt-1 text-gray-400 rounded-full text-sm py-1 mb-3'>Quanto mais títulos, mais chances de ganhar</p>
-
+       {rifa && rifa.sorteada && <p className='text-green-600'>Essa rifa ja foi sorteada</p> }
+       {rifa && rifa.sorteada && <p className='text-green-600'>Numero sorteado {rifa.numeroSorteado}</p> }
         {!rifa?.sorteada && (
           <>
             <div className='grid grid-cols-3 w-full gap-2'>
@@ -230,7 +232,7 @@ const Page = ({ params }) => {
       </div>
 
       {modalLogin && (
-        <div id='modalLogin' className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10 backdrop-blur-sm' onClick={fecharModalLogin}>
+        <div id='modalLogin' className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50  backdrop-blur-sm' onClick={fecharModalLogin}>
           <div className='bg-white p-6 rounded-md max-w-xs text-center'>
             <p className='mb-4'>Você precisa estar logado para comprar bilhetes.</p>
             <Link href="/login">

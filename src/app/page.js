@@ -2,11 +2,8 @@
 import React, { useEffect } from 'react';
 import useFetchRifas from './hooks/useInfos';
 import Link from 'next/link';
-import Header from './components/Header';
 import Loading from './components/Loading';
 import { getToken } from './actions/getToken';
-import jwt from "jsonwebtoken"
-
 
 
 const Page = () => {
@@ -30,7 +27,6 @@ const Page = () => {
     <div className="p-6 max-w-4xl mx-auto bg-gray-800 rounded-lg">
       
       {loading && <Loading /> }
-      <Header />
       <h1 className='text-center my-6 text-3xl font-bold text-white'>Campanhas</h1>
       {ultima && (
         <Link href={`/rifas/${ultima._id}`} className='mb-6 flex flex-col bg-gray-900 rounded-lg shadow-lg'>

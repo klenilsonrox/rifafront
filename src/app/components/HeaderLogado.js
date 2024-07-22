@@ -7,7 +7,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 
 const HeaderLogado = () => {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
 
   function openMenu() {
     setOpen(open => !open);
@@ -15,13 +15,12 @@ const HeaderLogado = () => {
 
   async function buscarUser() {
     try {
-      const usuario = await getuser();
+      const response = await getuser();
 
-      if (usuario === 401) {
-        window.location.href = "/login";
-      }
 
-      setUser(usuario);
+     setUser(response)
+
+     
 
     } catch (error) {
       console.log(error);
@@ -42,8 +41,8 @@ const HeaderLogado = () => {
   }
 
   return (
-    <div className='bg-gray-900 text-white'>
-      <header className="p-4 max-w-6xl mx-auto flex items-center justify-between relative">
+    <div className='bg-gray-900 text-white z-50'>
+      <header className="p-4 max-w-6xl mx-auto flex items-center justify-between relative z-50">
         <Link href="/conta">
           <p className="text-2xl font-bold">RxCampanhas</p>
         </Link>
@@ -56,14 +55,24 @@ const HeaderLogado = () => {
               <p className="text-lg font-medium hover:text-yellow-400 transition-colors">Inicio</p>
             </Link>
           </li>
-          <li className="list-none" onClick={closeMenu}>
+          {user && <li className="list-none" onClick={closeMenu}>
             <Link href="/configuracoes">
               <p className="text-lg font-medium hover:text-yellow-400 transition-colors">Configurações</p>
             </Link>
-          </li>
-          <li className="list-none cursor-pointer" onClick={closeMenu}>
+          </li>}
+          {!user && <li className="list-none" onClick={closeMenu}>
+            <Link href="/login">
+              <p className="text-lg font-medium hover:text-yellow-400 transition-colors">Entrar</p>
+            </Link>
+          </li>}
+          {!user && <li className="list-none" onClick={closeMenu}>
+            <Link href="/cadastro">
+              <p className="text-lg font-medium hover:text-yellow-400 transition-colors">Criar conta</p>
+            </Link>
+          </li>}
+          {user && <li className="list-none cursor-pointer" onClick={closeMenu}>
             <p onClick={logout} className="text-lg font-medium hover:text-red-500 transition-colors">Sair da conta</p>
-          </li>
+          </li>}
         </nav>
       </header>
     </div>

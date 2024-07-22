@@ -71,6 +71,7 @@ const Login = () => {
               required
             />
           </div>
+          <Link href="/esqueci-senha" className='mt-2 block text-blue-700 font-bold'>Esqueci minha senha</Link>
           <button
             type="submit"
             className={`w-full p-3 text-white font-semibold rounded-lg shadow-md focus:outline-none ${
