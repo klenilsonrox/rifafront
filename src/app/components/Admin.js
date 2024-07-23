@@ -254,7 +254,7 @@ errorRef.current = setTimeout(()=>{
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-[#1F2937] rounded-xl">
+    <div className="max-w-2xl mx-auto p-4 bg-[#1F2937] rounded-xl">
       {loading && <Loading />}
       {!loading && (
         <>
@@ -265,7 +265,7 @@ errorRef.current = setTimeout(()=>{
 
           <div className="space-y-4">
             {rifas.rifas && rifas.rifas.map((rifa) => (
-              <div key={rifa._id} className="bg-[#374151] p-4 rounded-md flex flex-col md:flex-row md:justify-between items-start md:items-center">
+              <div key={rifa._id} className="bg-[#374151] p-4 rounded-md flex flex-col md:justify-between items-start md:items-center">
                 <div className="w-full md:w-2/3">
                   <h2 className="text-white text-xl">{rifa.nome}</h2>
                   <img src={rifa.urlImage} alt={rifa.nome} className="w-full h-auto mb-2 rounded-md" />
@@ -280,7 +280,7 @@ errorRef.current = setTimeout(()=>{
                   <p className="text-gray-300">Total de Bilhetes: {rifa.total_bilhetes}</p>
                 </div>
 
-                <div className="flex mt-4 md:mt-0 space-x-2">
+                <div className="flex mt-4 flex-col w-full lg:md:w-2/3 gap-2 ">
                   <button className="text-white bg-blue-600 py-2 px-6 rounded-md" onClick={() => openModalBusca(rifa)}>Buscar Ganhador</button>
                   <button className="text-white bg-yellow-600 py-2 px-6 rounded-md" onClick={() => openEditModal(rifa)}>Editar</button>
                   <button className="text-white bg-red-600 py-2 px-6 rounded-md" onClick={() => confirmDelete(rifa)}>Excluir</button>

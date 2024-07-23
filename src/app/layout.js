@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
      <link rel="shortcut icon" href="./favicon.png" type="image/x-icon"></link>
 
-      <body className={inter.className}>
+      <body className="min-h-screen">
         <HeaderLogado />
         {children}
         <Footer />

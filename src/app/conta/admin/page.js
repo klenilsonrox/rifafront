@@ -23,7 +23,7 @@ const page = () => {
 
   return (
     <>
-    {user.isAdmin && <div className="p-4 max-w-7xl mx-auto">
+    {user.isAdmin && <div className="p-4 max-w-7xl mx-auto ">
         <Admin />
       </div>}
     </>

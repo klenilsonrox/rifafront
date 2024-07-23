@@ -39,25 +39,21 @@ const Login = () => {
     }
   };
 
-  function closeLogin(e) {
-    if (e.target.id === "modalLogin") {
-      window.location.href = "/";
-    }
-  }
+
 
   return (
-    <div className="bg-gray-100 p-6 flex items-center flex-col justify-center min-h-screen" onClick={closeLogin} id='modalLogin'>
+    <div className="bg-gray-100 p-6 flex items-center flex-col justify-center min-h-screen" >
       <div className="max-w-lg mx-auto w-full bg-white shadow-lg rounded-lg flex flex-col p-4 items-center">
         <h2 className="text-xl font-bold mb-4">Login</h2>
         {error && <div className="mb-4 text-red-500">{error}</div>}
-        <form className="space-y-4 w-full max-w-lg" onSubmit={handleLogin}>
+        <form className="space-y-4 w-full max-w-lg" >
           <div>
             <label className="block mb-2 font-semibold">Email</label>
             <input
               type="email"
               className="w-full p-3 bg-white rounded-lg shadow-md focus:outline-none border"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={({target}) => setEmail(target.value)}
               required
             />
           </div>
@@ -78,7 +74,7 @@ const Login = () => {
               isSubmitting ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
             }`}
             disabled={isSubmitting}
-          >
+           onClick={handleLogin}>
             {isSubmitting ? 'Entrando...' : 'Entrar'}
           </button>
         </form>

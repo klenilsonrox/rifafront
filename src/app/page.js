@@ -24,7 +24,7 @@ const Page = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-gray-800 rounded-lg">
+    <div className="p-6 max-w-2xl mx-auto bg-gray-800 rounded-lg min-h-screen">
       
       {loading && <Loading /> }
       <h1 className='text-center my-6 text-3xl font-bold text-white'>Campanhas</h1>

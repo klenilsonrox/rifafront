@@ -78,8 +78,8 @@ const Rifas = () => {
 
 
   return (
-    <div className='bg-gray-900 flex justify-center items-center'>
-      <div className="bg-gray-800 p-2 max-w-4xl mx-auto flex flex-col gap-6 ">
+    <div className=' flex justify-center items-start p-4'>
+      <div className="bg-gray-800 p-2 max-w-3xl w-full mx-auto flex flex-col items-s gap-6">
 
         {rifas && rifas.map(rif => (
           <div key={rif._id} className='bg-gray-700 p-4 rounded-lg '>
