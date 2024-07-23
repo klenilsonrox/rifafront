@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import HeaderLogado from "./components/HeaderLogado";
+import Footer from "./components/Footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
 
       <body className={inter.className}>
         <HeaderLogado />
-        {children}</body>
+        {children}
+        <Footer />
+        </body>
     </html>
   );
 }

@@ -22,6 +22,8 @@ console.log(response)
 
 if(response===401){
   setUser(null)
+} else{
+  setUser(response)
 }
 
     
@@ -45,11 +47,11 @@ if(response===401){
   }
 
   
-
+console.log(user)
 
   return (
-    <div className='bg-gray-900 text-white z-50'>
-      <header className="p-4 max-w-6xl mx-auto flex items-center justify-between relative z-50">
+    <div className='bg-gray-900 text-white'>
+      <header className="p-4 max-w-6xl mx-auto flex items-center justify-between relative ">
         <Link href="/conta">
           <p className="text-2xl font-bold">RxCampanhas</p>
         </Link>

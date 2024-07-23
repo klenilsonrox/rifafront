@@ -17,9 +17,12 @@ const page = () => {
     } )
 
     const data = await response.json()
-    if(data.message===undefined){
-      window.location.href="/"
-    }
+
+    console.log(data)
+
+    // if(data.message===undefined){
+    //   window.location.href="/"
+    // }
 
   
     } catch (error) {
