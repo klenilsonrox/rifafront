@@ -278,6 +278,7 @@ errorRef.current = setTimeout(()=>{
                   <p className="text-gray-300">Preço: R${rifa.preco}</p>
                   <p className="text-gray-300">Data do Sorteio: {formatDateToBrazilian(rifa.data_sorteio)}</p>
                   <p className="text-gray-300">Total de Bilhetes: {rifa.total_bilhetes}</p>
+                  <p className="text-gray-300">Bilhetes vendidos: {rifa.bilhetes_vendidos}</p>
                 </div>
 
                 <div className="flex mt-4 flex-col w-full lg:md:w-2/3 gap-2 ">

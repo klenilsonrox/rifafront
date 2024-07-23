@@ -152,7 +152,7 @@ const Page = ({ params }) => {
         </div>
       )}
       {error && (
-        <div className='bg-black fixed inset-0  flex items-center justify-center bg-opacity-25 backdrop-blur-sm'>
+        <div className='bg-black fixed inset-0  flex items-center justify-center bg-opacity-25 backdrop-blur-sm z-50'>
           <p className='flex items-center gap-2 bg-white text-black px-4 py-2 border-b-4 border-red-600'>{error}<IoMdAlert className='text-red-600' /></p>
         </div>
       )}
