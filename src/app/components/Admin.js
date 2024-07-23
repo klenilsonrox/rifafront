@@ -99,7 +99,9 @@ const Admin = () => {
   };
 
   const buscarGanhador = async (e) => {
+
     e.preventDefault();
+    clearTimeout(errorRef.current)
     const token = await getToken();
     try {
       setLoading(true);
@@ -111,6 +113,20 @@ const Admin = () => {
       });
 
       const data = await response.json();
+      console.log(data)
+if(data.message==="Este número nao foi comprado"){
+  setErro("Este número nao foi comprado")
+}
+
+errorRef.current = setTimeout(()=>{
+  setErro(null)
+  return
+},2000)
+
+      setGanhador(data)
+      console.log(ganhador)
+
+
       setLoading(false);
 
       if (data.status === 200) {
@@ -262,199 +278,146 @@ const Admin = () => {
                   <p className="text-gray-300">Preço: R${rifa.preco}</p>
                   <p className="text-gray-300">Data do Sorteio: {formatDateToBrazilian(rifa.data_sorteio)}</p>
                   <p className="text-gray-300">Total de Bilhetes: {rifa.total_bilhetes}</p>
-                  <p className="text-gray-300">Número Sorteado: {rifa.numeroSorteado || 'Nenhum'}</p>
-                  <p className="text-gray-300">Sorteada: {rifa.sorteada ? 'Sim' : 'Não'}</p>
-                  <div className="flex flex-col md:space-x-4 mt-4 md:mt-0 gap-2 items-startl">
-                  <button className="bg-yellow-500 text-white py-2 max-w-[300px] px-4 rounded-md mb-2 md:mb-0" onClick={() => openModalBusca(rifa)}>Buscar Ganhador</button>
-                  <button className="bg-blue-500 text-white py-2 max-w-[300px] px-4 rounded-md mb-2 md:mb-0" onClick={() => openEditModal(rifa)}>Editar</button>
-                  <button className="bg-red-500 text-white py-2 max-w-[300px] px-4 rounded-md" onClick={() => confirmDelete(rifa)}>Deletar</button>
                 </div>
+
+                <div className="flex mt-4 md:mt-0 space-x-2">
+                  <button className="text-white bg-blue-600 py-2 px-6 rounded-md" onClick={() => openModalBusca(rifa)}>Buscar Ganhador</button>
+                  <button className="text-white bg-yellow-600 py-2 px-6 rounded-md" onClick={() => openEditModal(rifa)}>Editar</button>
+                  <button className="text-white bg-red-600 py-2 px-6 rounded-md" onClick={() => confirmDelete(rifa)}>Excluir</button>
                 </div>
-                
               </div>
-              
             ))}
           </div>
-          
-          {/* Modal para confirmação de deleção */}
-          {showModal && (
-            <div id="deleteModal" className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={(e) => e.target.id === "deleteModal" && setShowModal(false)}>
-              <div className="bg-white p-6 rounded-md w-full max-w-sm">
-                <h2 className="text-lg font-semibold mb-4">Confirmar Deleção</h2>
-                <p className="mb-4">Você tem certeza que deseja deletar esta rifa?</p>
-                <div className="flex justify-end space-x-4">
-                  <button className="bg-gray-500 text-white py-2 px-4 rounded-md" onClick={() => setShowModal(false)}>Cancelar</button>
-                  <button className="bg-red-500 text-white py-2 px-4 rounded-md" onClick={handleDelete}>Deletar</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Modal para busca do ganhador */}
-          {modalBusca && (
-            <div id="modalBusca" className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={close}>
-              <div className="bg-white p-6 rounded-md w-full max-w-md">
-                <h2 className="text-lg font-semibold mb-4">Buscar Ganhador</h2>
-                <form onSubmit={buscarGanhador}>
-                  <input
-                    type="text"
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Digite o número do bilhete"
-                  />
-                  <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">Buscar</button>
-                </form>
-                {loading && <Loading />}
-                {ganhador && (
-                  <div className="mt-4">
-                    <p className="text-green-500">Ganhador: {ganhador.nome}</p>
-                  </div>
-                )}
-                {erro && <p className="text-red-500 mt-4">{erro}</p>}
-                <button className="bg-gray-500 text-white py-2 px-4 rounded-md mt-4" onClick={closeModalBuscarGanhador}>Fechar</button>
-              </div>
-            </div>
-          )}
-
-          {/* Modal para criar nova rifa */}
-          {showCreateModal && (
-            <div id="createModal" className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={closeCreateModal}>
-              <div className="bg-white p-6 rounded-md w-full max-w-md">
-                <h2 className="text-lg font-semibold mb-4">Criar Nova Rifa</h2>
-                <form onSubmit={handleCreateRifa}>
-                  <input
-                    type="text"
-                    name="nome"
-                    value={newRifa.nome}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Nome da Rifa"
-                    required
-                  />
-                  <textarea
-                    name="descricao"
-                    value={newRifa.descricao}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Descrição"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="urlImage"
-                    value={newRifa.urlImage}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="URL da Imagem"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="preco"
-                    value={newRifa.preco}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Preço"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="total_bilhetes"
-                    value={newRifa.total_bilhetes}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Total de Bilhetes"
-                    required
-                  />
-                  <input
-                    type="date"
-                    name="data_sorteio"
-                    value={newRifa.data_sorteio}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    required
-                  />
-                  <button type="submit" className="bg-green-600 text-white py-2 px-4 rounded-md" disabled={createLoading}>
-                    {createLoading ? 'Criando...' : 'Criar Rifa'}
-                  </button>
-                  <button type="button" className="bg-gray-500 text-white py-2 px-4 rounded-md mt-4" onClick={() => setShowCreateModal(false)}>Fechar</button>
-                </form>
-              </div>
-            </div>
-          )}
-
-          {/* Modal para editar rifa */}
-          {modalEdit && (
-            <div id="editModal" className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={closeEditModal}>
-              <div className="bg-white p-6 rounded-md w-full max-w-md">
-                <h2 className="text-lg font-semibold mb-4">Editar Rifa</h2>
-                <form onSubmit={handleEditRifa}>
-                  <input
-                    type="text"
-                    name="nome"
-                    value={editRifa.nome}
-                    onChange={handleEditChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Nome da Rifa"
-                    required
-                  />
-                  <textarea
-                    name="descricao"
-                    value={editRifa.descricao}
-                    onChange={handleEditChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Descrição"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="urlImage"
-                    value={editRifa.urlImage}
-                    onChange={handleEditChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="URL da Imagem"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="preco"
-                    value={editRifa.preco}
-                    onChange={handleEditChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Preço"
-                    required
-                  />
-                  <input
-                    type="number"
-                    name="total_bilhetes"
-                    value={editRifa.total_bilhetes}
-                    onChange={handleEditChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    placeholder="Total de Bilhetes"
-                    required
-                  />
-                  <input
-                    type="date"
-                    name="data_sorteio"
-                    value={editRifa.data_sorteio}
-                    onChange={handleEditChange}
-                    className="border border-gray-300 p-2 mb-4 w-full"
-                    required
-                  />
-                  <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded-md" disabled={editLoading}>
-                    {editLoading ? 'Atualizando...' : 'Atualizar Rifa'}
-                  </button>
-                  <button type="button" className="bg-gray-500 text-white py-2 px-4 rounded-md mt-4" onClick={() => setModalEdit(false)}>Fechar</button>
-                </form>
-              </div>
-            </div>
-          )}
         </>
       )}
-      <ToastContainer />
+
+      {/* Modal para confirmação de exclusão */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-md shadow-md">
+            <h2 className="text-lg font-semibold mb-4">Confirmação de Exclusão</h2>
+            <p className="mb-6">Tem certeza de que deseja excluir a rifa <strong>{selectedRifa.nome}</strong>?</p>
+            <div className="flex justify-end space-x-4">
+              <button className="text-gray-700" onClick={() => setShowModal(false)}>Cancelar</button>
+              <button className="text-red-600" onClick={handleDelete}>Excluir</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para criar rifa */}
+      {showCreateModal && (
+        <div id="createModal" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" onClick={closeCreateModal}>
+          <div className="bg-white p-8 rounded-md shadow-md w-full max-w-lg">
+            <h2 className="text-lg font-semibold mb-4">Criar Nova Rifa</h2>
+            <form onSubmit={handleCreateRifa}>
+              <div className="mb-4">
+                <label className="block text-gray-700">Nome</label>
+                <input type="text" name="nome" value={newRifa.nome} onChange={handleChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Descrição</label>
+                <textarea name="descricao" value={newRifa.descricao} onChange={handleChange} className="w-full px-4 py-2 border rounded-md" required></textarea>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">URL da Imagem</label>
+                <input type="text" name="urlImage" value={newRifa.urlImage} onChange={handleChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Preço</label>
+                <input type="number" name="preco" value={newRifa.preco} onChange={handleChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Total de Bilhetes</label>
+                <input type="number" name="total_bilhetes" value={newRifa.total_bilhetes} onChange={handleChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Data do Sorteio</label>
+                <input type="date" name="data_sorteio" value={newRifa.data_sorteio} onChange={handleChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="flex justify-end">
+                <button className="text-gray-700 mr-4" onClick={() => setShowCreateModal(false)}>Cancelar</button>
+                <button type="submit" className="text-white bg-green-600 py-2 px-6 rounded-md">{createLoading ? 'Criando...' : 'Criar'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para editar rifa */}
+      {modalEdit && (
+        <div id="editModal" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" onClick={closeEditModal}>
+          <div className="bg-white p-8 rounded-md shadow-md w-full max-w-lg">
+            <h2 className="text-lg font-semibold mb-4">Editar Rifa</h2>
+            <form onSubmit={handleEditRifa}>
+              <div className="mb-4">
+                <label className="block text-gray-700">Nome</label>
+                <input type="text" name="nome" value={editRifa.nome} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Descrição</label>
+                <textarea name="descricao" value={editRifa.descricao} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" required></textarea>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">URL da Imagem</label>
+                <input type="text" name="urlImage" value={editRifa.urlImage} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Preço</label>
+                <input type="number" name="preco" value={editRifa.preco} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Total de Bilhetes</label>
+                <input type="number" name="total_bilhetes" value={editRifa.total_bilhetes} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Data do Sorteio</label>
+                <input type="date" name="data_sorteio" value={editRifa.data_sorteio} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Sorteada</label>
+                <input type="checkbox" name="sorteada" checked={editRifa.sorteada} onChange={(e) => setEditRifa({ ...editRifa, sorteada: e.target.checked })} className="form-checkbox" />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Número Sorteado</label>
+                <input type="number" name="numeroSorteado" value={editRifa.numeroSorteado} onChange={handleEditChange} className="w-full px-4 py-2 border rounded-md" disabled={!editRifa.sorteada} />
+              </div>
+              <div className="flex justify-end">
+                <button className="text-gray-700 mr-4" onClick={() => setModalEdit(false)}>Cancelar</button>
+                <button type="submit" className="text-white bg-green-600 py-2 px-6 rounded-md">{editLoading ? 'Editando...' : 'Editar'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para buscar ganhador */}
+      {modalBusca && (
+        <div id="modalBusca" className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" onClick={close}>
+          <div className="bg-white p-8 rounded-md shadow-md w-full max-w-lg">
+            <h2 className="text-lg font-semibold mb-4">Buscar Ganhador</h2>
+            <form onSubmit={buscarGanhador}>
+              <div className="mb-4">
+                <label className="block text-gray-700">Número</label>
+                <input type="number" value={number} onChange={(e) => setNumber(e.target.value)} className="w-full px-4 py-2 border rounded-md" required />
+              </div>
+              {erro && <p className='py-2 text-red-600 font-bold text-center'>{erro}</p> }
+              {ganhador && <div className='my-4 bg-gray-200 p-3 rounded-md'>
+                <p className='text-green-600'>Ganhador {ganhador.nome}</p>
+                <p className='text-green-600'>email {ganhador.email}</p>
+              </div> }
+              <div className="flex justify-end">
+                <button className="text-gray-700 mr-4" onClick={closeModalBuscarGanhador}>Cancelar</button>
+                <button type="submit" className="text-white bg-blue-600 py-2 px-6 rounded-md">{loading ? 'Buscando...' : 'Buscar'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
 
 export default Admin;
+

@@ -69,6 +69,8 @@ const Page = ({ params }) => {
     });
   }
 
+  console.log(rifa)
+
   useEffect(() => {
     if (quantidadeBilhetes > 2000) {
       setQuantidadeBilhetes(2000);
