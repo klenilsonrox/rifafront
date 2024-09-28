@@ -34,6 +34,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">&copy; 2024 RxCampanhas. Todos os direitos reservados.</p>
+          <Link href="https://www.removeragua.com">removeragua.com</Link>
         </div>
       </div>
     </footer>

@@ -143,7 +143,7 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div className="max-w-3xl w-full mx-auto bg-[#1F2937] rounded-xl relative p-2">
+    <div className="max-w-3xl w-full mx-auto bg-[#1F2937] rounded-xl relative p-2 min-h-screen">
       <Link href="/" className='absolute z-10 bg-white top-[30px] left-4 p-1 rounded-full shadow-lg border'><IoIosArrowBack className='text-3xl text-red-600 '/></Link>
       {loading && <Loading /> }
       {success && (
